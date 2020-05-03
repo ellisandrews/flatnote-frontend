@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import { LinkContainer } from 'react-router-bootstrap'
 
 
 class NavBar extends Component {
-    
+
   render() {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#">FlatNote</Navbar.Brand>
+      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <LinkContainer to="/">
+          <Navbar.Brand>FlatNote</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">{/* Links added here will be left aligned on the NavBar*/}</Nav>
+          <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="#">New Note</Nav.Link>
-            <Nav.Link href="#">Sign Out</Nav.Link>
+            <LinkContainer to="/notes/new">
+              <Nav.Link>New Note</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/signout">
+              <Nav.Link>Sign Out</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
