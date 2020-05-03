@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
 
 class Login extends Component {
@@ -28,11 +28,15 @@ class Login extends Component {
       <Container>
         <h1>Log In</h1>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group>          
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" name="username" placeholder="Enter username" value={this.state.username} onChange={this.handleInputChange}/>
+          <Form.Group as={Row}>
+            <Form.Label column sm="1">Username</Form.Label>
+            <Col sm="3">
+              <Form.Control type="text" name="username" placeholder="Enter username" value={this.state.username} onChange={this.handleInputChange}/>
+            </Col>
+            <Col>
+              <Button variant="primary" type="submit">Submit</Button>
+            </Col>
           </Form.Group>
-          <Button variant="primary" type="submit">Submit</Button>
         </Form>
       </Container>
     )
