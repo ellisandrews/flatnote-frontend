@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { connect } from 'react-redux'
+
+import { login } from '../../actions/sessions'
 
 
 class Login extends Component {
@@ -20,7 +23,7 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('FORM SUBMITTED:', this.state)
+    this.props.login(this.state.username)
   }
 
   render() {
@@ -44,4 +47,4 @@ class Login extends Component {
 }
 
 
-export default Login
+export default connect(null, { login })(Login)

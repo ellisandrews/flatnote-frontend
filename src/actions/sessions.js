@@ -1,5 +1,6 @@
 // TODO: Store the backend API URL somewhere global
 
+
 const login = username => {
   return dispatch => {
     // Dispatch action that the session is being loaded
@@ -22,5 +23,9 @@ const login = username => {
       .then(user => {
         dispatch({ type: 'LOG_IN_USER', user })
       })
+      .catch(err => console.log("** ERROR ** :", err))
   }
 }
+
+
+export { login }
