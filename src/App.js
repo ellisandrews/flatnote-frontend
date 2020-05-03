@@ -1,12 +1,22 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+import NavBar from './components/layout/NavBar'
+import Display from './components/layout/Display'
 
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1>FlatNote</h1>
-    </div>
+    <Router>
+      <NavBar />
+      <Display />
+    </Router>
   )
 }
+
 
 export default App;
