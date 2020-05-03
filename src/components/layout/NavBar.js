@@ -1,10 +1,32 @@
 import React, { Component } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 
 
 class NavBar extends Component {
+
+  renderSessionComponents = () => {
+    if (this.props.loggedInUser) {
+      return (
+        <>
+          <LinkContainer to="/notes/new">
+            <Nav.Link>New Note</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/signout">
+            <Nav.Link>Sign Out</Nav.Link>
+          </LinkContainer>
+        </>
+      )
+    } else {
+      return (
+        <LinkContainer to="/login">
+          <Nav.Link>Log In</Nav.Link>
+        </LinkContainer>
+      )
+    }
+  }
 
   render() {
     return (
@@ -16,12 +38,7 @@ class NavBar extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <LinkContainer to="/notes/new">
-              <Nav.Link>New Note</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/signout">
-              <Nav.Link>Sign Out</Nav.Link>
-            </LinkContainer>
+            {this.renderSessionComponents()}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -30,4 +47,11 @@ class NavBar extends Component {
 }
 
 
-export default NavBar
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.loggedInUser
+  }
+}
+
+
+export default connect(mapStateToProps)(NavBar)
