@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <h1>HOME</h1>
+        <h1>Home</h1>
         <p>Welcome to FlatNote!</p>
       </Container>
     )

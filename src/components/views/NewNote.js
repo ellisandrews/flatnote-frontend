@@ -7,7 +7,7 @@ class NewNote extends Component {
   render() {
     return (
       <Container>
-        <h1>NEW NOTE</h1>
+        <h1>New Note</h1>
         <p>Make a new note. Form coming soon...</p>
       </Container>
     )

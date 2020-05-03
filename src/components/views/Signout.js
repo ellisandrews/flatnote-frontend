@@ -7,7 +7,7 @@ class Signout extends Component {
   render() {
     return (
       <Container>
-        <h1>SIGNOUT</h1>
+        <h1>Signout</h1>
         <p>Thanks for using FlatNote!</p>
       </Container>
     )
