@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { login } from '../../actions/sessions'
 
@@ -22,8 +23,15 @@ class Login extends Component {
   }
 
   handleSubmit = event => {
+    // Prevent default form submission, and instead call the `login` action creator
     event.preventDefault()
-    this.props.login(this.state.username)
+    let { history } = this.props
+    
+    // Call the login action creator with a callback to send the user to the homepage after successful login
+    this.props.login(
+      this.state.username,
+      () => { history.push("/") }
+    )
   }
 
   render() {
@@ -47,4 +55,8 @@ class Login extends Component {
 }
 
 
-export default connect(null, { login })(Login)
+// Wrap with `withRouter` to have access to the `history` API through props
+export default connect(
+  null, 
+  { login }
+)(withRouter(Login))

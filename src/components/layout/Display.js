@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+
+import PrivateRoute from '../helpers/PrivateRoute'
 import Home from '../views/Home'
 import NewNote from '../views/NewNote'
 import Signout from '../views/Signout'
@@ -13,16 +15,16 @@ class Display extends Component {
       <Switch>
         <Route exact path="/login">
           <Login />
-        </Route>      
-        <Route exact path="/signout">
+        </Route>
+        <PrivateRoute exact path="/signout">
           <Signout />
-        </Route>
-        <Route exact path="/notes/new">
+        </PrivateRoute>
+        <PrivateRoute exact path="/notes/new">
           <NewNote />
-        </Route>
-        <Route exact path="/">
+        </PrivateRoute>
+        <PrivateRoute exact path="/">
           <Home />
-        </Route>
+        </PrivateRoute>
       </Switch>
     )
   }
