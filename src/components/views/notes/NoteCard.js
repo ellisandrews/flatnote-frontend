@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
 
 
@@ -8,11 +8,17 @@ const NoteCard = props => {
   const history = useHistory()
   const { note } = props
 
+  const textPreview = (text, charLength = 70) => text.length > charLength ? text.slice(0, charLength - 3) + '...' : text
+
   return (
-    <Container onClick={() => history.push(`/notes/${note.id}`)}>
-      <h6>{note.title}</h6>
-      <p>{note.content}</p>
-    </Container>
+    <Card style={{ width: '18rem' }} >
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card.Body>
+        <Card.Title>{note.title}</Card.Title>
+        <Card.Text>{textPreview(note.content)}</Card.Text>
+        <Button variant="primary" onClick={() => history.push(`/notes/${note.id}`)}>View</Button>
+      </Card.Body>
+    </Card>
   )
 }
 

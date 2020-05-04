@@ -15,15 +15,13 @@ class NotesIndex extends Component {
   }
   
   renderNotes = () => {
-    return this.props.notes.map(note => <li key={note.id}><NoteCard note={note}/></li>)
+    return this.props.notes.map(note => <NoteCard key={note.id} note={note}/>)
   }
   
   render() {
     return (
       <Container>
-        <ul>
-          {this.renderNotes()}
-        </ul>
+        {this.renderNotes()}
       </Container>
     )
   }
