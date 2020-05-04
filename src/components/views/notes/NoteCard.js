@@ -11,7 +11,7 @@ const NoteCard = props => {
   const textPreview = (text, charLength = 70) => text.length > charLength ? text.slice(0, charLength - 3) + '...' : text
 
   return (
-    <Card style={{ width: '18rem' }} >
+    <Card bg="dark" text="white">
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>
         <Card.Title>{note.title}</Card.Title>

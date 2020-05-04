@@ -14,14 +14,14 @@ class NotesIndex extends Component {
     fetchUserNotes(user_id)
   }
   
-  renderNotes = () => {
+  renderNoteCards = () => {
     return this.props.notes.map(note => <NoteCard key={note.id} note={note}/>)
   }
   
   render() {
     return (
-      <Container>
-        {this.renderNotes()}
+      <Container id="notes-index" className="overflow-auto">
+        {this.renderNoteCards()}
       </Container>
     )
   }
