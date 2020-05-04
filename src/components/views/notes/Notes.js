@@ -5,7 +5,6 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
-// import PrivateRoute from '../../helpers/PrivateRoute'
 import Note from './Note'
 
 

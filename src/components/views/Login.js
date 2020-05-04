@@ -36,7 +36,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Container>
+      <>
         <h1>Log In</h1>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group as={Row}>
@@ -49,7 +49,7 @@ class Login extends Component {
             </Col>
           </Form.Group>
         </Form>
-      </Container>
+      </>
     )
   }
 }
