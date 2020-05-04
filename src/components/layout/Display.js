@@ -13,6 +13,9 @@ class Display extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
         <Route exact path="/login">
           <Login />
         </Route>
@@ -21,9 +24,6 @@ class Display extends Component {
         </PrivateRoute>
         <PrivateRoute exact path="/notes/new">
           <NewNote />
-        </PrivateRoute>
-        <PrivateRoute exact path="/">
-          <Home />
         </PrivateRoute>
       </Switch>
     )
