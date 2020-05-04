@@ -1,12 +1,9 @@
 import React from 'react'
-import {
-  Switch,
-  Route,
-  useRouteMatch
-} from 'react-router-dom'
+import { Container, Col, Row } from 'react-bootstrap'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import NewNote from './NewNote'
-import Note from './Note'
+import NoteShow from './NoteShow'
 import NotesIndex from './NotesIndex'
 
 
@@ -15,18 +12,34 @@ const Notes = () => {
   let { path } = useRouteMatch()
 
   return (
-    <Switch>
-      <Route exact path={path}>
-        <NotesIndex/>
-      </Route>
-      <Route path={`${path}/new`}>
-        <NewNote/>
-      </Route>
-      <Route path={`${path}/:noteId`}>
-        <NotesIndex/>
-        <Note/>
-      </Route>
-    </Switch>
+    <Container>
+      <Switch>
+        
+        <Route exact path={path}>
+          <Row>
+            <Col md={5}>
+              <NotesIndex/>
+            </Col>
+          </Row>
+        </Route>
+        
+        <Route path={`${path}/new`}>
+          <NewNote/>
+        </Route>
+        
+        <Route path={`${path}/:noteId`}>
+          <Row>
+            <Col md={5}>
+              <NotesIndex/>
+            </Col>
+            <Col>
+              <NoteShow/>
+            </Col>
+          </Row>
+        </Route>
+
+      </Switch>
+    </Container>
   )
 }
 
