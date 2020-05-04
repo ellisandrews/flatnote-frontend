@@ -1,11 +1,8 @@
-// TODO: Store the backend API URL somewhere global
+// TODO: Store the backend API URL somewhere global?
 
 
 const login = (username, callback) => {
-  return dispatch => {
-    // Dispatch action that the session is being loaded
-    dispatch({ type: 'LOADING_SESSION'})
-    
+  return dispatch => {    
     // Create (or find) the user by username in the backend
     const req = {
       method: 'POST',
@@ -26,9 +23,12 @@ const login = (username, callback) => {
         dispatch({ type: 'LOG_IN_USER', user })
       })
       .then(() => callback())
-      .catch(err => console.log("** ERROR ** :", err))
+      .catch(err => console.log("ERROR:", err))
   }
 }
 
 
-export { login }
+const logout = () => ({ type: 'LOG_OUT_USER' })
+
+
+export { login, logout }

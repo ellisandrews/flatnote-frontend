@@ -1,12 +1,15 @@
 const rootReducer = (state = {}, action) => {
 
   switch (action.type) {
-    case 'LOADING_SESSION':
-      return state  // TODO!
     case 'LOG_IN_USER':
       return {
         ...state,
         loggedInUser: action.user
+      }
+    case 'LOG_OUT_USER':
+      return {
+        ...state,
+        loggedInUser: null
       }
     default:
       return state

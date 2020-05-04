@@ -4,8 +4,14 @@ import Navbar from 'react-bootstrap/Navbar'
 import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 
+import { logout } from '../../actions/sessions'
+
 
 class NavBar extends Component {
+
+  handleSignOutClick = () => {
+    this.props.logout()
+  }
 
   renderSessionComponents = () => {
     if (this.props.loggedInUser) {
@@ -14,7 +20,7 @@ class NavBar extends Component {
           <LinkContainer to="/notes/new">
             <Nav.Link>New Note</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/signout">
+          <LinkContainer to="/" onClick={this.handleSignOutClick}>
             <Nav.Link>Sign Out</Nav.Link>
           </LinkContainer>
         </>
@@ -30,7 +36,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+      <Navbar expand="md" bg="dark" variant="dark">
         <LinkContainer to="/">
           <Navbar.Brand>FlatNote</Navbar.Brand>
         </LinkContainer>
@@ -54,4 +60,7 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(NavBar)
+export default connect(
+  mapStateToProps,
+  { logout }
+)(NavBar)
