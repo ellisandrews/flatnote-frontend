@@ -13,17 +13,12 @@ class NavBar extends Component {
     this.props.logout()
   }
 
-  renderSessionComponents = () => {
+  renderSessionLink = () => {
     if (this.props.loggedInUser) {
       return (
-        <>
-          <LinkContainer to="/notes/new">
-            <Nav.Link>New Note</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/" onClick={this.handleSignOutClick}>
-            <Nav.Link>Sign Out</Nav.Link>
-          </LinkContainer>
-        </>
+        <LinkContainer to="/" onClick={this.handleSignOutClick}>
+          <Nav.Link>Sign Out</Nav.Link>
+        </LinkContainer>
       )
     } else {
       return (
@@ -34,6 +29,34 @@ class NavBar extends Component {
     }
   }
 
+  renderNavLinks = () => {
+    if (this.props.loggedInUser) {
+      return (
+        <>
+          <LinkContainer to="/notes">
+            <Nav.Link>Notes</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/notes/new">
+            <Nav.Link>New Note</Nav.Link>
+          </LinkContainer>
+        </>
+      )
+    }
+  }
+
+  renderLinks = () => {
+    return (
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          {this.renderNavLinks()}
+        </Nav>
+        <Nav>
+          {this.renderSessionLink()}
+        </Nav>
+      </Navbar.Collapse>
+    )
+  }
+
   render() {
     return (
       <Navbar expand="md" bg="dark" variant="dark">
@@ -41,12 +64,7 @@ class NavBar extends Component {
           <Navbar.Brand>FlatNote</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto"></Nav>
-          <Nav>
-            {this.renderSessionComponents()}
-          </Nav>
-        </Navbar.Collapse>
+        {this.renderLinks()}
       </Navbar>
         )
     }
