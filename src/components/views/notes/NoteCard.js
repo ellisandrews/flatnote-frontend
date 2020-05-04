@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 
 

@@ -17,6 +17,11 @@ const rootReducer = (state = initialState, action) => {
         loggedInUser: null,
         notes: []
       }
+    case 'STORE_NOTES':
+      return {
+        ...state,
+        notes: action.notes
+      }
     case 'ADD_NOTE':
       return {
         ...state,
