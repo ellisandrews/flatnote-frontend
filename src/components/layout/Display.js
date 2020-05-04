@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import PrivateRoute from '../helpers/PrivateRoute'
 import Home from '../views/Home'
-import NewNote from '../views/NewNote'
+import Notes from '../views/notes/Notes'
 import Login from '../views/Login'
 
 
@@ -13,13 +13,13 @@ class Display extends Component {
     return (
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home/>
         </Route>
         <Route exact path="/login">
-          <Login />
+          <Login/>
         </Route>
-        <PrivateRoute exact path="/notes/new">
-          <NewNote />
+        <PrivateRoute path="/notes">
+          <Notes/>
         </PrivateRoute>
       </Switch>
     )

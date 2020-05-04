@@ -17,6 +17,9 @@ class NavBar extends Component {
     if (this.props.loggedInUser) {
       return (
         <>
+          <LinkContainer to="/notes">
+            <Nav.Link>Notes</Nav.Link>
+          </LinkContainer>
           <LinkContainer to="/notes/new">
             <Nav.Link>New Note</Nav.Link>
           </LinkContainer>

@@ -1,4 +1,4 @@
-const rootReducer = (state = {}, action) => {
+const rootReducer = (state = {loggedInUser: null}, action) => {
 
   switch (action.type) {
     case 'LOG_IN_USER':
