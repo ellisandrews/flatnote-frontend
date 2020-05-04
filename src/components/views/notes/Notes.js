@@ -3,9 +3,11 @@ import {
   Switch,
   Route,
   useRouteMatch
-} from "react-router-dom";
+} from 'react-router-dom'
 
+import NewNote from './NewNote'
 import Note from './Note'
+import NotesIndex from './NotesIndex'
 
 
 const Notes = () => {
@@ -15,9 +17,13 @@ const Notes = () => {
   return (
     <Switch>
       <Route exact path={path}>
-        <h3>Notes / Dashboard Page</h3>
+        <NotesIndex/>
+      </Route>
+      <Route path={`${path}/new`}>
+        <NewNote/>
       </Route>
       <Route path={`${path}/:noteId`}>
+        <NotesIndex/>
         <Note/>
       </Route>
     </Switch>
