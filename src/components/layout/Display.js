@@ -19,9 +19,6 @@ class Display extends Component {
         <Route exact path="/login">
           <Login />
         </Route>
-        <PrivateRoute exact path="/signout">
-          <Signout />
-        </PrivateRoute>
         <PrivateRoute exact path="/notes/new">
           <NewNote />
         </PrivateRoute>
