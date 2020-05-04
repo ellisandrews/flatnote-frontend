@@ -1,12 +1,19 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import NavBar from './components/layout/NavBar'
+import Display from './components/layout/Display'
 
 
-function App() {
+// Wrap App components with <Router> for frontend routing
+const App = () => {
   return (
-    <div>
-      <h1>FlatNote</h1>
-    </div>
+    <Router>
+      <NavBar />
+      <Display />
+    </Router>
   )
 }
+
 
 export default App;
