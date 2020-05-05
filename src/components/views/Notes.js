@@ -2,9 +2,9 @@ import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
-import NewNote from './NewNote'
-import NoteShow from './NoteShow'
-import NotesIndex from './NotesIndex'
+import NewNote from './notes/NewNote'
+import NoteShow from './notes/NoteShow'
+import NotesIndex from './notes/NotesIndex'
 
 
 const Notes = () => {
