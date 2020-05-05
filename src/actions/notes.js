@@ -1,4 +1,4 @@
-const createNote = (note, callback) => {
+const createNote = (note, redirectToNote) => {
   return dispatch => {    
     // Create (or find) the note in the backend
     const req = {
@@ -16,8 +16,8 @@ const createNote = (note, callback) => {
       .then(resp => resp.json())
       .then(note => {
         dispatch({ type: 'ADD_NOTE', note })
+        redirectToNote(note.id)
       })
-      .then(() => callback())
       .catch(err => console.log("ERROR:", err))
   }
 }
