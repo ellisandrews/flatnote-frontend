@@ -17,6 +17,12 @@ class NewNote extends Component {
     }
   }
 
+  parseTagNames = () => {
+    const rawNames = this.state.tags.split(',')  // Split on comma into array of raw tag names
+    const trimmedNames = rawNames.map(rawName => rawName.trim())  // Trim leading and trailing whitespace from each tag name
+    return trimmedNames.map(trimmedName => trimmedName.replace(/\s\s+/g, ' '))  // Replace internal whitespace with single space
+  }
+  
   handleInputChange = event => {
     const { name, value } = event.target
     this.setState({
@@ -29,9 +35,13 @@ class NewNote extends Component {
     event.preventDefault()
     const { history, createNote, user_id } = this.props
     
+    // Extract note data from component state
+    const { title, content } = this.state
+    const tag_names = this.parseTagNames()
+  
     // Call the login action creator with a callback to send the user to the homepage after successful login
     createNote(
-      { ...this.state, user_id },
+      { title, content, tag_names, user_id },
       () => { history.push("/notes") }
     )
   }
