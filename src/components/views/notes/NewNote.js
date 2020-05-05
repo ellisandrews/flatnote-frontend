@@ -12,7 +12,8 @@ class NewNote extends Component {
     super(props)
     this.state = {
       title: '',
-      content: ''
+      content: '',
+      tags: ''
     }
   }
 
@@ -48,12 +49,19 @@ class NewNote extends Component {
           </Form.Group>
           <Form.Group as={Row}>
             <Form.Label column sm="1">Content</Form.Label>
-            <Col sm="6">
+            <Col sm="9">
               <Form.Control as="textarea" rows="7" name="content" placeholder="Enter note content" value={this.state.content} onChange={this.handleInputChange}/>
             </Col>
           </Form.Group>
           <Form.Group as={Row}>
-            <Col sm={{ offset: 6 }}>
+            <Form.Label column sm="1">Tags</Form.Label>
+            <Col sm="6">
+              <Form.Control type="text" rows="7" name="tags" placeholder="Tag1, Tag2, ..." value={this.state.tags} onChange={this.handleInputChange}/>
+              <Form.Text className="text-muted">Comma-separated list of tags</Form.Text>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Col sm={{ offset: 1 }}>
               <Button variant="primary" type="submit">Save</Button>
             </Col>
           </Form.Group>
