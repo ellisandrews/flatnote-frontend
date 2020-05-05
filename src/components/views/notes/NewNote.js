@@ -30,6 +30,13 @@ class NewNote extends Component {
     });
   }
 
+  handleCancelClick = () => {
+    const abandonChanges = window.confirm('Are you sure you want to abondon changes?')
+    if (abandonChanges) {
+      this.props.history.push(`/notes`)
+    }
+  }
+
   handleSubmit = event => {
     // Prevent default form submission, and instead call the `createNote` action creator
     event.preventDefault()
@@ -49,7 +56,11 @@ class NewNote extends Component {
   render() {
     return (
       <>
-        <h1>New Note</h1>
+        <Row>
+          <Col sm={{ offset: 1 }}>
+            <h3>New Note</h3>
+          </Col>
+        </Row>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group as={Row}>
             <Form.Label column sm="1">Title</Form.Label>
@@ -72,6 +83,7 @@ class NewNote extends Component {
           </Form.Group>
           <Form.Group as={Row}>
             <Col sm={{ offset: 1 }}>
+              <Button variant="outline-secondary" onClick={this.handleCancelClick}>Cancel</Button>{' '}
               <Button variant="primary" type="submit">Save</Button>
             </Col>
           </Form.Group>
