@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Container } from 'react-bootstrap'
+import { titleCase } from '../../../utils'
 
 
-const Note = props => {
+class Note extends Component {
   
-  const { note } = props
-  
-  return (
-    <Container>
-      <h2>{note.title}</h2>
-      <p>{note.content}</p>
-    </Container>
-  )
+  renderTags = () => {
+    const { tags } = this.props.note
+    
+    // TODO: Make tags into their own little cards or buttons instead of this string
+    const tagList = (tags && tags.length > 0) ? tags.map(tag => titleCase(tag.name)).join(', ') : 'None'
+
+    return <p>Tags: {tagList}</p>
+  }
+
+  render() {
+    const { note } = this.props
+
+    return (
+      <Container>
+        <h2>{note.title}</h2>
+        <p>{note.content}</p>
+        {this.renderTags()}
+      </Container>
+    )
+  }
 }
 
 
