@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Container } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { deleteNote } from '../../../actions/notes'
 import { titleCase } from '../../../utils'
 
 
@@ -22,12 +24,15 @@ class Note extends Component {
   }
 
   handleDeleteClick = () => {
-    console.log('DELETE CLICK')
-   // Ask the user if they really want to delete the note
-
-   // Delete the note
-
-   // Redirect to /notes index
+    // Ask the user if they really want to delete the note
+    const proceed = window.confirm('Are you sure you want to permanently delete this note?')
+    if (proceed) {
+      const { history, note, deleteNote } = this.props
+      deleteNote(
+        note.id, 
+        () => history.push('/notes')
+      )
+    }
   }
 
   render() {
@@ -46,4 +51,7 @@ class Note extends Component {
 }
 
 
-export default withRouter(Note)
+export default connect(
+  null,
+  { deleteNote }
+)(withRouter(Note))

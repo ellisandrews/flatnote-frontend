@@ -46,6 +46,25 @@ const updateNote = (noteId, noteData, redirectToNote) => {
 }
 
 
+const deleteNote = (noteId, redirect) => {
+  return dispatch => {    
+
+    const req = {
+      method: 'DELETE',
+    }
+
+    // Make the request to the backend. 
+    fetch(`http://localhost:3000/notes/${noteId}`, req)
+      .then(resp => resp.json())
+      .then(respJSON => {
+        dispatch({ type: 'DELETE_NOTE', noteId })
+        redirect()
+      })
+      .catch(err => console.log("ERROR:", err))
+  }
+}
+
+
 const fetchUserNotes = user_id => {
   return dispatch => {
     // Construct URL with `user_id` param for fetching the user's notes from the backend
@@ -65,4 +84,4 @@ const fetchUserNotes = user_id => {
 }
 
 
-export { createNote, fetchUserNotes, updateNote }
+export { createNote, deleteNote, fetchUserNotes, updateNote }

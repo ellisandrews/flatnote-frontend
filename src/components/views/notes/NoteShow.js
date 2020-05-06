@@ -6,6 +6,9 @@ import Note from './Note'
 
 
 const NoteShow = props => {
+
+  console.log('NoteShow Called')
+
   // Get the note ID from the URL, and parse it as an int
   let { noteId } = useParams()
   noteId = parseInt(noteId)

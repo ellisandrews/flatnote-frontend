@@ -32,6 +32,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notes: state.notes.map(note => (note.id === action.note.id) ? action.note : note ) 
       }
+    case 'DELETE_NOTE':
+      return {
+        ...state,
+        notes: state.notes.filter(note => note.id !== action.noteId) 
+      }
     default:
       return state
   }

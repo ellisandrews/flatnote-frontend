@@ -27,7 +27,6 @@ class NoteForm extends Component {
   }
 
   render() {
-
     // action is either 'New' or 'Edit'
     // handleCancel sends user back to the note show page or the note index
     // handleSubmit either 'POST's new or 'PATCH'es existing
