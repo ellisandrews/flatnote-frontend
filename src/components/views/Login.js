@@ -25,12 +25,12 @@ class Login extends Component {
   handleSubmit = event => {
     // Prevent default form submission, and instead call the `login` action creator
     event.preventDefault()
-    let { history } = this.props
+    let { history, login } = this.props
     
     // Call the login action creator with a callback to send the user to the homepage after successful login
-    this.props.login(
+    login(
       this.state.username,
-      () => { history.push("/") }
+      () => history.push("/")
     )
   }
 

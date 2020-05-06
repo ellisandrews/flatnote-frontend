@@ -15,14 +15,14 @@ const login = (username, callback) => {
     }
 
     // Make the request to the backend. 
-    // Then dispatch an action to add the user to redux state as logged in.
+    // Then dispatch an action to add the user to redux state as logged in (and save their notes in one fell swoop)
     // Then execute the callback (likely redirecting to a new page).
     fetch('http://localhost:3000/users', req)
       .then(resp => resp.json())
       .then(user => {
-        dispatch({ type: 'LOG_IN_USER', user })
+        dispatch({ type: 'LOG_IN_USER', user })  // Store user's data (including notes!)
+        callback()
       })
-      .then(() => callback())
       .catch(err => console.log("ERROR:", err))
   }
 }
