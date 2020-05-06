@@ -30,9 +30,9 @@ class EditNote extends Component {
   }
 
   handleSubmit = (event, formData) => {
-    // Prevent default form submission, and instead call the `createNote` action creator
+    // Prevent default form submission, and instead call the `updateNote` action creator
     event.preventDefault()
-    const { history, updateNote, user_id } = this.props
+    const { history, updateNote } = this.props
     
     // Extract note data
     const { title, content, tags } = formData
@@ -41,7 +41,7 @@ class EditNote extends Component {
     // Call the updateNote action creator. Pass a callback to send the user to the newly update note
     updateNote(
       this.state.note.id,
-      { title, content, tag_names, user_id },
+      { title, content, tag_names },
       noteId => { history.push(`/notes/${noteId}`) }
     )
   }
@@ -54,7 +54,6 @@ class EditNote extends Component {
 
 const mapStateToProps = state => {
   return {
-    user_id: state.loggedInUser.id,
     notes: state.notes
   }
 }
