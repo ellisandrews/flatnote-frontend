@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import NewNote from './notes/NewNote'
 import EditNote from './notes/EditNote'
-import NoteShow from './notes/ShowNote'
+import ShowNote from './notes/ShowNote'
 import NotesIndex from './notes/NotesIndex'
 
 
@@ -22,7 +22,7 @@ const Notes = () => {
         <Col>
           <Switch>
             <Route exact path={`${path}/new`} component={NewNote} />
-            <Route exact path={`${path}/:noteId`} component={NoteShow} />
+            <Route exact path={`${path}/:noteId`} component={ShowNote} />
             <Route exact path={`${path}/:noteId/edit`} component={EditNote} />  
           </Switch>
         </Col>
