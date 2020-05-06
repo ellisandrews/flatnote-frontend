@@ -27,6 +27,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notes: [...state.notes, action.note]
       }
+    case 'UPDATE_NOTE':
+      return {
+        ...state,
+        notes: state.notes.map(note => (note.id === action.note.id) ? action.note : note ) 
+      }
     default:
       return state
   }

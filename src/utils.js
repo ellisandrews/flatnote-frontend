@@ -14,11 +14,13 @@ export const titleCase = string => {
 
 
 export const tagArrayToString = tagArray => {
-  return tagArray.join(', ')
+  // Converts array of Tags from the backend ( {id: 1, name: 'Tag'} ) to comma-separated string to display.
+  return tagArray.map(tag => titleCase(tag.name)).join(', ')
 }
 
 
 export const tagStringToArray = tagString => {
+  // Converts comma-separated string of tag names to an array of strings that the backend expects.
   const rawNames = tagString.split(',')  // Split on comma into array of raw tag names
   const trimmedNames = rawNames.map(rawName => rawName.trim())  // Trim leading and trailing whitespace from each tag name
   return trimmedNames.map(trimmedName => trimmedName.replace(/\s\s+/g, ' '))  // Replace internal whitespace with single space

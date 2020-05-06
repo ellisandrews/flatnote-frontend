@@ -13,8 +13,8 @@ class NoteForm extends Component {
     const note = props.note
 
     this.state = {
-      title: note.title || '',
-      content: note.content || '',
+      title: note.title,
+      content: note.content,
       tags: tagArrayToString(note.tags)  // Note that empty array produces empty string
     }
   }
