@@ -18,6 +18,19 @@ class Note extends Component {
     return <p>Tags: {tagList}</p>
   }
 
+  renderNote = () => {
+    const { note } = this.props
+    return (
+      <>
+        <h2>{note.title}</h2>
+        <p>{note.content}</p>
+        {this.renderTags()}
+        <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
+        <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
+      </>
+    )
+  } 
+
   handleEditClick = () => {
     // Redirect to the edit page
     this.props.history.push(`/notes/${this.props.note.id}/edit`)
@@ -40,11 +53,7 @@ class Note extends Component {
 
     return (
       <Container>
-        <h2>{note.title}</h2>
-        <p>{note.content}</p>
-        {this.renderTags()}
-        <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
-        <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
+        { note ? this.renderNote() : <p>Note does not exist.</p> }
       </Container>
     )
   }
