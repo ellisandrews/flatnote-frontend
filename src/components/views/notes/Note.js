@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Container } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
+
 import { titleCase } from '../../../utils'
 
 
@@ -14,6 +16,20 @@ class Note extends Component {
     return <p>Tags: {tagList}</p>
   }
 
+  handleEditClick = () => {
+    // Redirect to the edit page
+    this.props.history.push(`/notes/${this.props.note.id}/edit`)
+  }
+
+  handleDeleteClick = () => {
+    console.log('DELETE CLICK')
+   // Ask the user if they really want to delete the note
+
+   // Delete the note
+
+   // Redirect to /notes index
+  }
+
   render() {
     const { note } = this.props
 
@@ -22,10 +38,12 @@ class Note extends Component {
         <h2>{note.title}</h2>
         <p>{note.content}</p>
         {this.renderTags()}
+        <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
+        <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
       </Container>
     )
   }
 }
 
 
-export default Note
+export default withRouter(Note)
