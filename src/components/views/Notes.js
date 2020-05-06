@@ -16,38 +16,18 @@ const Notes = () => {
   return (
     <>
       <h1>Notes</h1>
-      <Switch>
-        <Route exact path={path}>
-          <Row>
-            <Col md={5}>
-              <NotesIndex/>
-            </Col>
-          </Row>
-        </Route>
-        <Route exact path={`${path}/new`}>
-          <NewNote/>
-        </Route>
-        <Route exact path={`${path}/:noteId`}>
-          <Row>
-            <Col md={5}>
-              <NotesIndex/>
-            </Col>
-            <Col>
-              <NoteShow/>
-            </Col>
-          </Row>
-        </Route>
-        <Route exact path={`${path}/:noteId/edit`}>
-          <Row>
-            <Col md={5}>
-              <NotesIndex/>
-            </Col>
-            <Col>
-              <EditNote/>
-            </Col>
-          </Row>
-        </Route>
-      </Switch>
+      <Row>
+        <Col md={4}>
+          <NotesIndex/>
+        </Col>
+        <Col>
+          <Switch>
+            <Route exact path={`${path}/new`} component={NewNote} />
+            <Route exact path={`${path}/:noteId`} component={NoteShow} />
+            <Route exact path={`${path}/:noteId/edit`} component={EditNote} />  
+          </Switch>
+        </Col>
+      </Row>
     </>
   )
 }
