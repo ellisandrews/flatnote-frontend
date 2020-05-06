@@ -6,7 +6,8 @@ const userReducer = (state = initialState, action) => {
     
     case 'LOG_IN_USER':
       // Save the logged in user data
-      return action.user
+      const { id, username } = action.user
+      return { id, username }
     
     case 'LOG_OUT_USER':
       // Reset to initial state
