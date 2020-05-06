@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import NewNote from './notes/NewNote'
 import EditNote from './notes/EditNote'
-import NoteShow from './notes/NoteShow'
+import NoteShow from './notes/ShowNote'
 import NotesIndex from './notes/NotesIndex'
 
 
@@ -12,7 +12,6 @@ const Notes = () => {
   // From the react-router docs: "The `path` lets us build <Route> paths that are relative to the parent route/."
   let { path } = useRouteMatch()
 
-  // TODO: DRY up code a bit, specifically <NotesIndex> repeated
   return (
     <>
       <h1>Notes</h1>

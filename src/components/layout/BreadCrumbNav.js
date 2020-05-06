@@ -6,13 +6,6 @@ import { titleCase } from '../../utils'
 
 class BreadCrumbNav extends Component {
   
-  // pathToName = {
-  //   '/login': 'Log In',
-  //   '/notes': 'Notes',
-  //   '/notes/new': 'New',
-  //   '/notes/edit': 'Edit'
-  // }
-
   renderBreadcrumbItems = () => {
     // This item will always be rendered
     const breadcrumbItems = [ <Breadcrumb.Item key={1} href="/">Home</Breadcrumb.Item> ]
