@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import Note from './Note'
 
 
-const NoteShow = props => {
+const ShowNote = props => {
   // Get the note ID from the URL, and parse it as an int
   let { noteId } = useParams()
   noteId = parseInt(noteId)
@@ -25,4 +25,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(NoteShow)
+export default connect(mapStateToProps)(ShowNote)

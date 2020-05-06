@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import { Button, Nav, Navbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -13,12 +12,17 @@ class NavBar extends Component {
     this.props.logout()
   }
 
-  renderSessionLink = () => {
+  renderRightLinks = () => {
     if (this.props.loggedInUser) {
       return (
-        <LinkContainer to="/" onClick={this.handleSignOutClick}>
-          <Nav.Link>Sign Out</Nav.Link>
-        </LinkContainer>
+        <>
+          <LinkContainer to="/notes/new">
+            <Nav.Item as={Button}>+ New</Nav.Item>
+          </LinkContainer>
+          <LinkContainer to="/" onClick={this.handleSignOutClick}>
+            <Nav.Link>Sign Out</Nav.Link>
+          </LinkContainer>
+        </>
       )
     } else {
       return (
@@ -29,15 +33,12 @@ class NavBar extends Component {
     }
   }
 
-  renderNavLinks = () => {
+  renderLeftLinks = () => {
     if (this.props.loggedInUser) {
       return (
         <>
           <LinkContainer to="/notes">
-            <Nav.Link>Notes</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/notes/new">
-            <Nav.Link>New Note</Nav.Link>
+            <Nav.Link>My Notes</Nav.Link>
           </LinkContainer>
         </>
       )
@@ -48,10 +49,10 @@ class NavBar extends Component {
     return (
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          {this.renderNavLinks()}
+          {this.renderLeftLinks()}
         </Nav>
         <Nav>
-          {this.renderSessionLink()}
+          {this.renderRightLinks()}
         </Nav>
       </Navbar.Collapse>
     )
