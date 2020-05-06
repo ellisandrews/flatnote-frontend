@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Container } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { deleteNote } from '../../../actions/notes'
 import { titleCase } from '../../../utils'
 
 
@@ -16,18 +18,34 @@ class Note extends Component {
     return <p>Tags: {tagList}</p>
   }
 
+  renderNote = () => {
+    const { note } = this.props
+    return (
+      <>
+        <h2>{note.title}</h2>
+        <p>{note.content}</p>
+        {this.renderTags()}
+        <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
+        <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
+      </>
+    )
+  } 
+
   handleEditClick = () => {
     // Redirect to the edit page
     this.props.history.push(`/notes/${this.props.note.id}/edit`)
   }
 
   handleDeleteClick = () => {
-    console.log('DELETE CLICK')
-   // Ask the user if they really want to delete the note
-
-   // Delete the note
-
-   // Redirect to /notes index
+    // Ask the user if they really want to delete the note
+    const proceed = window.confirm('Are you sure you want to permanently delete this note?')
+    if (proceed) {
+      const { history, note, deleteNote } = this.props
+      deleteNote(
+        note.id, 
+        () => history.push('/notes')
+      )
+    }
   }
 
   render() {
@@ -35,15 +53,14 @@ class Note extends Component {
 
     return (
       <Container>
-        <h2>{note.title}</h2>
-        <p>{note.content}</p>
-        {this.renderTags()}
-        <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
-        <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
+        { note ? this.renderNote() : <p>Note does not exist.</p> }
       </Container>
     )
   }
 }
 
 
-export default withRouter(Note)
+export default connect(
+  null,
+  { deleteNote }
+)(withRouter(Note))
