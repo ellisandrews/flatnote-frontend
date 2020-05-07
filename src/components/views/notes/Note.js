@@ -15,19 +15,24 @@ class Note extends Component {
     // TODO: Make tags into their own little cards or buttons instead of this string
     const tagList = (tags && tags.length > 0) ? tags.map(tag => titleCase(tag.name)).join(', ') : 'None'
 
-    return <p>Tags: {tagList}</p>
+    return (
+      <div style={{marginTop: 40, marginBottom: 40}}>
+        <h6>Tags</h6>
+        <p>{tagList}</p>
+      </div> 
+    )
   }
 
   renderNote = () => {
     const { note } = this.props
     return (
-      <>
-        <h2>{note.title}</h2>
+      <div>
+        <h3>{note.title}</h3>
         <p>{note.content}</p>
         {this.renderTags()}
         <Button variant="primary" onClick={this.handleEditClick}>Edit</Button>{' '}
         <Button variant="danger" onClick={this.handleDeleteClick}>Delete</Button>
-      </>
+      </div>
     )
   } 
 

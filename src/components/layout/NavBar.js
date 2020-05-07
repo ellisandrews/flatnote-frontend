@@ -38,7 +38,7 @@ class NavBar extends Component {
       return (
         <>
           <LinkContainer to="/notes">
-            <Nav.Link>My Notes</Nav.Link>
+            <Nav.Link>Notes</Nav.Link>
           </LinkContainer>
         </>
       )

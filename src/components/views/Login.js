@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -11,7 +11,8 @@ class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: ''
+      username: '',
+      password: ''
     }
   }
 
@@ -36,20 +37,25 @@ class Login extends Component {
 
   render() {
     return (
-      <>
-        <h1>Log In</h1>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group as={Row}>
-            <Form.Label column sm="1">Username</Form.Label>
-            <Col sm="3">
-              <Form.Control type="text" name="username" placeholder="Enter username" value={this.state.username} onChange={this.handleInputChange}/>
-            </Col>
-            <Col>
-              <Button variant="primary" type="submit">Submit</Button>
-            </Col>
-          </Form.Group>
-        </Form>
-      </>
+      <Container className="h-100">
+        <Container className="row h-100 justify-content-center align-items-center">
+          <Container className="col-5 col-md-8 col-lg-6 text-center">
+            <h1>Log In</h1>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group>
+                <Form.Control type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange}/>
+              </Form.Group>
+              <Form.Group>
+                <Form.Control type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange}/>
+              </Form.Group>
+              <Container className="mx-auto text-center">
+                <Button variant="primary" type="submit">Submit</Button>
+              </Container>
+            </Form>
+          </Container>
+        </Container>
+      </Container>
+
     )
   }
 }

@@ -1,21 +1,37 @@
 import React, { Component } from 'react'
-import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+
 
 import NoteCard from './NoteCard'
 
 
 class NotesIndex extends Component {
   
+  renderNoNotes = () => {
+    const showingNew = this.props.location.pathname === "/notes/new"
+    return (
+      <>
+        <p>Created notes will show up here.</p>
+        { showingNew ? null : <p><Link to="/notes/new">New Note</Link></p> }
+      </>
+    )
+  }
+
   renderNoteCards = () => {
-    return this.props.notes.map(note => <NoteCard key={note.id} note={note}/>)
+    const cards = this.props.notes.map(note => <NoteCard key={note.id} note={note}/>)
+    return cards.length > 0 ? cards : this.renderNoNotes()
   }
   
   render() {
     return (
-      <Container id="notes-index" className="overflow-auto">
-        {this.renderNoteCards()}
-      </Container>
+      <div>
+        <h3>Notes</h3>
+        <div style={{"maxHeight": "70vh"}} className="overflow-auto">
+          {this.renderNoteCards()}
+        </div>
+      </div>
+      
     )
   }
 }
@@ -28,4 +44,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(NotesIndex)
+export default connect(mapStateToProps)(withRouter(NotesIndex))
