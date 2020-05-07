@@ -58,4 +58,9 @@ const logout = () => {
 }
 
 
-export { login, logout, signup }
+const setLoggedInUser = user => {
+  return { type: 'LOG_IN_USER', user }
+}
+
+
+export { login, logout, setLoggedInUser, signup }

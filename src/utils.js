@@ -28,8 +28,7 @@ export const tagStringToArray = tagString => {
 }
 
 
-export const getAuthTokenHeader = () => {
-  return {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  }
-}
+export const getAuthToken = () => localStorage.getItem('token')
+
+
+export const getAuthTokenHeader = () => ({'Authorization': `Bearer ${getAuthToken()}`})
