@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { login } from '../../actions/sessions'
 
@@ -53,10 +53,10 @@ class Login extends Component {
                 <Button variant="primary" type="submit">Submit</Button>
               </Container>
             </Form>
+            <p style={{paddingTop: 20, fontSize: "smaller"}}>Don't have an account? <Link to="/signup">Sign Up</Link></p>
           </Container>
         </Container>
       </Container>
-
     )
   }
 }
