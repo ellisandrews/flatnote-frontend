@@ -9,8 +9,10 @@ const signup = (data, callback) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: data.username,
-        password: data.password
+        user: {
+          username: data.username,
+          password: data.password
+        }
       })
     }
 
