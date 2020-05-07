@@ -4,8 +4,9 @@ import { Switch, Route } from 'react-router-dom'
 
 import PrivateRoute from '../helpers/PrivateRoute'
 import Home from '../views/Home'
-import Notes from '../views/Notes'
 import Login from '../views/Login'
+import Notes from '../views/Notes'
+import Signup from '../views/Signup'
 
 
 class Display extends Component {
@@ -15,6 +16,7 @@ class Display extends Component {
       <Container>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute path="/notes" component={Notes} />
         </Switch>
@@ -22,5 +24,6 @@ class Display extends Component {
     )
   }
 }
+
 
 export default Display
