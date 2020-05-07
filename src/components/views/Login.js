@@ -31,6 +31,7 @@ class Login extends Component {
     // Call the login action creator with a callback to send the user to the homepage after successful login
     login(
       this.state.username,
+      this.state.password,
       () => history.push("/")
     )
   }

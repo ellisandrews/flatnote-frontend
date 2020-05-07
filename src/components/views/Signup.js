@@ -30,7 +30,8 @@ class Signup extends Component {
     
     // Call the signup action creator with a callback to send the user to the homepage after successful signup
     signup(
-      this.state,
+      this.state.username,
+      this.state.password,
       () => history.push("/")
     )
   }
