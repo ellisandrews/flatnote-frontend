@@ -25,3 +25,10 @@ export const tagStringToArray = tagString => {
   const trimmedNames = rawNames.map(rawName => rawName.trim())  // Trim leading and trailing whitespace from each tag name
   return trimmedNames.map(trimmedName => trimmedName.replace(/\s\s+/g, ' '))  // Replace internal whitespace with single space
 }
+
+
+export const getAuthTokenHeader = () => {
+  return {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
+}
