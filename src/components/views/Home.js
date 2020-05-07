@@ -22,7 +22,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log('user:', this.props.loggedInUser)
     return (
       <Container className="text-center">
         <h1>Home</h1>

@@ -24,12 +24,6 @@ class NavBar extends Component {
           </LinkContainer>
         </>
       )
-    } else {
-      return (
-        <LinkContainer to="/login">
-          <Nav.Link>Log In</Nav.Link>
-        </LinkContainer>
-      )
     }
   }
 

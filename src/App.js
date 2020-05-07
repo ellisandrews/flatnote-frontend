@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import './App.css'
@@ -8,15 +9,22 @@ import BreadCrumbNav from './components/layout/BreadCrumbNav'
 
 
 // Wrap App components with <Router> for frontend routing
-const App = () => {
+const App = props => {
   return (
     <Router>
       <NavBar />
-      <BreadCrumbNav />
+      { props.loggedInUser ? <BreadCrumbNav /> : null }
       <Display />
     </Router>
   )
 }
 
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.loggedInUser
+  }
+}
+
+
+export default connect(mapStateToProps)(App);
