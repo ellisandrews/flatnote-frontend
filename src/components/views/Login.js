@@ -40,7 +40,7 @@ class Login extends Component {
     return (
       <Container className="h-100">
         <Container className="row h-100 justify-content-center align-items-center">
-          <Container className="col-5 col-md-8 col-lg-6 text-center">
+          <Container className="col-4 text-center">
             <h1>Log In</h1>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
