@@ -32,23 +32,29 @@ const authFetchRequest = (url, username, password, dispatch, callback) => {
 
   fetch(url, req)
     .then(resp => {
-      // Fetch doesn't error on status >= 400, so have to check resp.ok
+
+      // Note this is a promise
+      const respJSON = resp.json()
+
+      // Handle the 'happy path'. Fetch doesn't error on status >= 400, so have to check resp.ok
       if (resp.ok) { 
-        return resp.json()
+        respJSON.then(userData => {
+            dispatch({ type: 'LOG_IN_USER', user: userData.user })  // Store user's data (including notes!)
+            localStorage.setItem('token', userData.token)  // Save the user's token in localStorage
+            callback()
+        })
       }
 
-      // Error out on 400 codes
+      // Show alerts for errors returned by the server from bad requests
       if (resp.status >= 400 && resp.status < 500) {
-        // TODO: Check the errors returned from the backend to customize this message
-        throw new Error('Request failed.')
+        respJSON.then(errorData => {
+            window.alert(errorData.error)
+        })
       }
     })
-    .then(userData => {
-      dispatch({ type: 'LOG_IN_USER', user: userData.user })  // Store user's data (including notes!)
-      localStorage.setItem('token', userData.token)  // Save the user's token in localStorage
-      callback()
+    .catch(err => {
+      window.alert(`Unknown Error: ${err}`)
     })
-    .catch(err => window.alert(`ERROR: ${err}`))
 }
 
 

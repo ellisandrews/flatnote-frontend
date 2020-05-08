@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import './App.css'
 import { setLoggedInUser } from './actions/sessions'
+import Loading from './components/helpers/Loading'
 import BreadCrumbNav from './components/layout/BreadCrumbNav'
 import Display from './components/layout/Display'
 import NavBar from './components/layout/NavBar'
 import { getAuthToken, getAuthTokenHeader } from './utils'
-import Loading from './components/helpers/Loading'
+import './App.css'
 
 
 class App extends Component {
