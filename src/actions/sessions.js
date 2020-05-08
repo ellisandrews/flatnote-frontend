@@ -48,7 +48,7 @@ const authFetchRequest = (url, username, password, dispatch, callback) => {
       // Show alerts for errors returned by the server from bad requests
       if (resp.status >= 400 && resp.status < 500) {
         respJSON.then(errorData => {
-            window.alert(errorData.error)
+            window.alert(errorData.messages.join(', '))
         })
       }
     })
