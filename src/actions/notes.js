@@ -1,9 +1,10 @@
+import { handleResponse } from './utils'
 import { getAuthTokenHeader } from '../utils'
 
 
 const createNote = (note, redirectToNote) => {
   return dispatch => {    
-    // Create the note in the backend
+
     const req = {
       method: 'POST',
       headers: {
@@ -13,23 +14,28 @@ const createNote = (note, redirectToNote) => {
       body: JSON.stringify({ note })
     }
 
-    // Make the request to the backend. 
-    // Then dispatch an action to add the note to redux state.
-    // Then execute the callback (likely redirecting to a new page).
+    const createSuccess = note => {
+      dispatch({ type: 'ADD_NOTE', note })
+      redirectToNote(note.id)
+    }
+
+    const createFailure = error => {
+      window.alert(error.messages.join(', '))
+    }
+  
+    // Make the request to the backend, handling response appropriately.
     fetch('http://localhost:3000/notes', req)
-      .then(resp => resp.json())
-      .then(note => {
-        dispatch({ type: 'ADD_NOTE', note })
-        redirectToNote(note.id)
+      .then(resp => handleResponse(resp, createSuccess, createFailure))
+      .catch(err => {
+        window.alert(`Unknown Error: ${err}`)
       })
-      .catch(err => console.log("ERROR:", err))
   }
 }
 
 
 const updateNote = (noteId, noteData, redirectToNote) => {
   return dispatch => {    
-    // Create (or find) the note in the backend
+
     const req = {
       method: 'PATCH',
       headers: {
@@ -39,14 +45,20 @@ const updateNote = (noteId, noteData, redirectToNote) => {
       body: JSON.stringify({ note: noteData })
     }
 
-    // Make the request to the backend. 
+    const updateSuccess = note => {
+      dispatch({ type: 'UPDATE_NOTE', note })
+      redirectToNote(note.id)
+    }
+
+    const updateFailure = error => {
+      window.alert(error.messages.join(', '))
+    }
+    
     fetch(`http://localhost:3000/notes/${noteId}`, req)
-      .then(resp => resp.json())
-      .then(note => {
-        dispatch({ type: 'UPDATE_NOTE', note })
-        redirectToNote(note.id)
+      .then(resp => handleResponse(resp, updateSuccess, updateFailure))
+      .catch(err => {
+        window.alert(`Unknown Error: ${err}`)
       })
-      .catch(err => console.log("ERROR:", err))
   }
 }
 
@@ -59,14 +71,20 @@ const deleteNote = (noteId, redirect) => {
       headers: getAuthTokenHeader()
     }
 
-    // Make the request to the backend. 
+    const deleteSuccess = () => {
+      dispatch({ type: 'DELETE_NOTE', noteId })
+      redirect()
+    }
+
+    const deleteFailure = error => {
+      window.alert(error.messages.join(', '))
+    }
+
     fetch(`http://localhost:3000/notes/${noteId}`, req)
-      .then(resp => resp.json())
-      .then(respJSON => {
-        dispatch({ type: 'DELETE_NOTE', noteId })
-        redirect()
+      .then(resp => handleResponse(resp, deleteSuccess, deleteFailure))
+      .catch(err => {
+        window.alert(`Unknown Error: ${err}`)
       })
-      .catch(err => console.log("ERROR:", err))
   }
 }
 
