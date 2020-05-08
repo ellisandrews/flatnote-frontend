@@ -1,9 +1,13 @@
+import { getAuthTokenHeader } from '../utils'
+
+
 const createNote = (note, redirectToNote) => {
   return dispatch => {    
     // Create the note in the backend
     const req = {
       method: 'POST',
       headers: {
+        ...getAuthTokenHeader(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(note)
@@ -29,6 +33,7 @@ const updateNote = (noteId, noteData, redirectToNote) => {
     const req = {
       method: 'PATCH',
       headers: {
+        ...getAuthTokenHeader(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(noteData)
@@ -51,6 +56,7 @@ const deleteNote = (noteId, redirect) => {
 
     const req = {
       method: 'DELETE',
+      headers: getAuthTokenHeader()
     }
 
     // Make the request to the backend. 

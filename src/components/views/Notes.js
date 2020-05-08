@@ -13,21 +13,18 @@ const Notes = () => {
   let { path } = useRouteMatch()
 
   return (
-    <>
-      <h1>Notes</h1>
-      <Row>
-        <Col md={4}>
-          <NotesIndex/>
-        </Col>
-        <Col>
-          <Switch>
-            <Route exact path={`${path}/new`} component={NewNote} />
-            <Route exact path={`${path}/:noteId`} component={ShowNote} />
-            <Route exact path={`${path}/:noteId/edit`} component={EditNote} />  
-          </Switch>
-        </Col>
-      </Row>
-    </>
+    <Row>
+      <Col md={4}>
+        <NotesIndex/>
+      </Col>
+      <Col>
+        <Switch>
+          <Route exact path={`${path}/new`} component={NewNote} />
+          <Route exact path={`${path}/:noteId`} component={ShowNote} />
+          <Route exact path={`${path}/:noteId/edit`} component={EditNote} />  
+        </Switch>
+      </Col>
+    </Row>
   )
 }
 

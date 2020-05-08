@@ -23,5 +23,12 @@ export const tagStringToArray = tagString => {
   // Converts comma-separated string of tag names to an array of strings that the backend expects.
   const rawNames = tagString.split(',')  // Split on comma into array of raw tag names
   const trimmedNames = rawNames.map(rawName => rawName.trim())  // Trim leading and trailing whitespace from each tag name
-  return trimmedNames.map(trimmedName => trimmedName.replace(/\s\s+/g, ' '))  // Replace internal whitespace with single space
+  const singleSpaced = trimmedNames.map(trimmedName => trimmedName.replace(/\s\s+/g, ' '))  // Replace internal whitespace with single space
+  return singleSpaced.filter(singleSpacedName => singleSpacedName )  // Don't allow empty string tags
 }
+
+
+export const getAuthToken = () => localStorage.getItem('token')
+
+
+export const getAuthTokenHeader = () => ({'Authorization': `Bearer ${getAuthToken()}`})

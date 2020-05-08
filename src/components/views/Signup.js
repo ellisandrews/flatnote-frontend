@@ -3,10 +3,10 @@ import { Button, Container, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import { login } from '../../actions/sessions'
+import { signup } from '../../actions/sessions'
 
 
-class Login extends Component {
+class Signup extends Component {
 
   constructor(props) {
     super(props)
@@ -24,12 +24,12 @@ class Login extends Component {
   }
 
   handleSubmit = event => {
-    // Prevent default form submission, and instead call the `login` action creator
+    // Prevent default form submission, and instead call the `signup` action creator
     event.preventDefault()
-    let { history, login } = this.props
+    let { history, signup } = this.props
     
-    // Call the login action creator with a callback to send the user to the homepage after successful login
-    login(
+    // Call the signup action creator with a callback to send the user to the homepage after successful signup
+    signup(
       this.state.username,
       this.state.password,
       () => history.push("/")
@@ -41,7 +41,7 @@ class Login extends Component {
       <Container className="h-100">
         <Container className="row h-100 justify-content-center align-items-center">
           <Container className="col-4 text-center">
-            <h1>Log In</h1>
+            <h1>Sign Up</h1>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
                 <Form.Control type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange}/>
@@ -53,7 +53,7 @@ class Login extends Component {
                 <Button variant="primary" type="submit">Submit</Button>
               </Container>
             </Form>
-            <p style={{paddingTop: 20, fontSize: "smaller"}}>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+            <p style={{paddingTop: 20, fontSize: "smaller"}}>Already have an account? <Link to="/login">Log In</Link></p>
           </Container>
         </Container>
       </Container>
@@ -65,5 +65,5 @@ class Login extends Component {
 // Wrap with `withRouter` to have access to the `history` API through props
 export default connect(
   null, 
-  { login }
-)(withRouter(Login))
+  { signup }
+)(withRouter(Signup))

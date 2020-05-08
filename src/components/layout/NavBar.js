@@ -24,12 +24,6 @@ class NavBar extends Component {
           </LinkContainer>
         </>
       )
-    } else {
-      return (
-        <LinkContainer to="/login">
-          <Nav.Link>Log In</Nav.Link>
-        </LinkContainer>
-      )
     }
   }
 
@@ -38,7 +32,7 @@ class NavBar extends Component {
       return (
         <>
           <LinkContainer to="/notes">
-            <Nav.Link>My Notes</Nav.Link>
+            <Nav.Link>Notes</Nav.Link>
           </LinkContainer>
         </>
       )
