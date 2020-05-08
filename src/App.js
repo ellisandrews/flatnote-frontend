@@ -16,24 +16,17 @@ class App extends Component {
   constructor(props) {
     super(props)
     
+    // Set loading to true if there is *NOT* a logged in user in redux store state but there *IS* a JWT in localStorage.
+    // This is a case where we will attempt to authenticate the user behind the scenes with the JWT to persist their session.
     this.state = {
-      loading: !this.props.loggedInUser  // Initially set to loading if there is not a logged in user
+      loading: !!(!this.props.loggedInUser && getAuthToken())
     }
   }
 
   componentDidMount() {
-
-    // Once the component mounts, we'll try to log in a user if and only if they are not logged in but there is a JWT in localStorage
-
-    // Don't try to do any auth requests if the user is already logged in.
-    if (this.props.loggedInUser) {
-      return
-    }
-
-    // If there's a token, try to authenticate with backend
-    if ( getAuthToken() ) {
-    
-      // Make a fetch request to the backend with the token in the header
+    // Run async logic to try to log in a user with an existing JWT only if applicable
+    if (this.state.loading) {
+      
       const req = {
         method: 'GET',
         headers: getAuthTokenHeader()
@@ -43,48 +36,30 @@ class App extends Component {
         .then(resp => resp.json())
         .then(user => {
           this.props.setLoggedInUser(user)
+          this.setState({ loading: false })
         })
         .catch(err => {
           console.log(err)
           this.setState({ loading: false })
-        })  
-    } else {
-      this.setState({ loading: false })
+        })
     }
   }
 
   conditionallyRender = () => {
-    const { loggedInUser } = this.props
-
-    // This is the case we're trying to handle: There is an auth token in localStorage but no logged in user in redux state.
-    if (!loggedInUser && getAuthToken()) {
-      return <Loading />
-    }
-
-    // Otherwise, render normally
-    return (
+    return this.state.loading ?
+      <Loading />
+        :
       <>
         <NavBar />
-          { loggedInUser ? <BreadCrumbNav /> : null }
+          { this.props.loggedInUser ? <BreadCrumbNav /> : null }
         <Display />
       </>
-    )
   }
 
   render() {
     return (
       <Router>
         {this.conditionallyRender()}
-        {
-          // If loggedInUser, render normally
-
-          // If not loggedInUser and no token, render normally
-
-          // If not loggedInUser and yes token, render loading while we try to log them in
-
-            // If token login fails, render normally
-            // If token login succeeds, render normally
-        }
       </Router>
     )
   }
