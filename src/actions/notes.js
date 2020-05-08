@@ -10,7 +10,7 @@ const createNote = (note, redirectToNote) => {
         ...getAuthTokenHeader(),
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(note)
+      body: JSON.stringify({ note })
     }
 
     // Make the request to the backend. 
@@ -36,7 +36,7 @@ const updateNote = (noteId, noteData, redirectToNote) => {
         ...getAuthTokenHeader(),
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(noteData)
+      body: JSON.stringify({ note: noteData })
     }
 
     // Make the request to the backend. 
