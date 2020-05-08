@@ -13,28 +13,28 @@ import { getAuthToken, getAuthTokenHeader } from './utils'
 // Wrap App components with <Router> for frontend routing
 class App extends Component {
   
-  constructor(props) {
-    super(props)
-    // Login via token if applicable (for page refreshes, etc.)
-    if ( getAuthToken() ) {
-      this.tokenLogin()
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   // Login via token if applicable (for page refreshes, etc.)
+  //   if ( getAuthToken() ) {
+  //     this.tokenLogin()
+  //   }
+  // }
 
-  tokenLogin = () => {
-    // Make a fetch request to the backend with the token in the header
-    const req = {
-      method: 'GET',
-      headers: getAuthTokenHeader()
-    }
+  // tokenLogin = () => {
+  //   // Make a fetch request to the backend with the token in the header
+  //   const req = {
+  //     method: 'GET',
+  //     headers: getAuthTokenHeader()
+  //   }
     
-    fetch('http://localhost:3000/current_user', req)
-      .then(resp => resp.json())
-      .then(user => {
-        this.props.setLoggedInUser(user)
-      })
-      .catch(err => console.log(err))  
-  }
+  //   fetch('http://localhost:3000/current_user', req)
+  //     .then(resp => resp.json())
+  //     .then(user => {
+  //       this.props.setLoggedInUser(user)
+  //     })
+  //     .catch(err => console.log(err))  
+  // }
 
   render() {
     return (
@@ -56,6 +56,6 @@ const mapStateToProps = state => {
 
 
 export default connect(
-  mapStateToProps,
-  { setLoggedInUser }
+  mapStateToProps  // ,
+  // { setLoggedInUser }
 )(App)
