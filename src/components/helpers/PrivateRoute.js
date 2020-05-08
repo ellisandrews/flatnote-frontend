@@ -13,21 +13,14 @@ class PrivateRoute extends Component {
     super(props)
 
     this.state = {
-      loading: !this.props.isLoggedIn  // Set to loading if the user isn't logged in. Will try to do auth with JWT. 
+      loading: !!(!this.props.isLoggedIn && getAuthToken()) 
     }
   }
 
   componentDidMount() {
-    
-    // Don't try to do any auth requests if the user is already logged in.
-    if (this.props.isLoggedIn) {
-      return
-    }
-
-    // If there's a token, try to authenticate with backend
-    if ( getAuthToken() ) {
-    
-      // Make a fetch request to the backend with the token in the header
+    // Run async logic to try to log in a user with an existing JWT only if applicable
+    if (this.state.loading) {
+      
       const req = {
         method: 'GET',
         headers: getAuthTokenHeader()
@@ -37,13 +30,12 @@ class PrivateRoute extends Component {
         .then(resp => resp.json())
         .then(user => {
           this.props.setLoggedInUser(user)
+          this.setState({ loading: false })
         })
         .catch(err => {
           console.log(err)
           this.setState({ loading: false })
-        })  
-    } else {
-      this.setState({ loading: false })
+        })
     }
   }
 

@@ -17,7 +17,7 @@ class App extends Component {
     super(props)
     
     // Set loading to true if there is *NOT* a logged in user in redux store state but there *IS* a JWT in localStorage.
-    // This is a case where we will attempt to authenticate the user behind the scenes with the JWT to persist their session.
+    // In this (and only this) case we will attempt to authenticate the user behind the scenes with the JWT to persist their session.
     this.state = {
       loading: !!(!this.props.loggedInUser && getAuthToken())
     }
@@ -46,12 +46,13 @@ class App extends Component {
   }
 
   conditionallyRender = () => {
+    // Rending a simple Loading component if we're communicating with the backend, otherwise normal app components
     return this.state.loading ?
       <Loading />
         :
       <>
         <NavBar />
-          { this.props.loggedInUser ? <BreadCrumbNav /> : null }
+        { this.props.loggedInUser ? <BreadCrumbNav /> : null }
         <Display />
       </>
   }
