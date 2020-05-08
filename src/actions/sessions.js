@@ -1,3 +1,6 @@
+import { handleResponse } from './utils'
+
+
 // TODO: Store the backend API URL somewhere global?
 
 const signup = (username, password, callback) => {
@@ -30,28 +33,18 @@ const authFetchRequest = (url, username, password, dispatch, callback) => {
     })
   }
 
+  const success = userData => {
+    dispatch({ type: 'LOG_IN_USER', user: userData.user })  // Store user's data (including notes!)
+    localStorage.setItem('token', userData.token)  // Save the user's token in localStorage
+    callback()
+  }
+
+  const failure = error => {
+    window.alert(error.messages.join(', '))
+  }
+
   fetch(url, req)
-    .then(resp => {
-
-      // Note this is a promise
-      const respJSON = resp.json()
-
-      // Handle the 'happy path'. Fetch doesn't error on status >= 400, so have to check resp.ok
-      if (resp.ok) { 
-        respJSON.then(userData => {
-            dispatch({ type: 'LOG_IN_USER', user: userData.user })  // Store user's data (including notes!)
-            localStorage.setItem('token', userData.token)  // Save the user's token in localStorage
-            callback()
-        })
-      }
-
-      // Show alerts for errors returned by the server from bad requests
-      if (resp.status >= 400 && resp.status < 500) {
-        respJSON.then(errorData => {
-            window.alert(errorData.messages.join(', '))
-        })
-      }
-    })
+    .then(resp => handleResponse(resp, success, failure))
     .catch(err => {
       window.alert(`Unknown Error: ${err}`)
     })
