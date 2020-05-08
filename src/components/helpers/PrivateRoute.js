@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Spinner, Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Redirect, Route } from 'react-router-dom'
 
+import Loading from './Loading'
 import { setLoggedInUser } from '../../actions/sessions'
 import { getAuthToken, getAuthTokenHeader } from '../../utils'
 
@@ -13,11 +13,17 @@ class PrivateRoute extends Component {
     super(props)
 
     this.state = {
-      loading: true
+      loading: !this.props.isLoggedIn  // Set to loading if the user isn't logged in. Will try to do auth with JWT. 
     }
   }
 
   componentDidMount() {
+    
+    // Don't try to do any auth requests if the user is already logged in.
+    if (this.props.isLoggedIn) {
+      return
+    }
+
     // If there's a token, try to authenticate with backend
     if ( getAuthToken() ) {
     
@@ -30,7 +36,6 @@ class PrivateRoute extends Component {
       fetch('http://localhost:3000/current_user', req)
         .then(resp => resp.json())
         .then(user => {
-          console.log('HIIIII')
           this.props.setLoggedInUser(user)
         })
         .catch(err => {
@@ -49,23 +54,12 @@ class PrivateRoute extends Component {
     }
 
     // If they're not logged in, check if they can be authenticated with a token from localStorage. 
-    // Display a loading spinner while they wait
-    if (this.state.loading) {
-      return (
-        <Container style={{padding: 100}} className="h-100">
-          <Container className="row h-100 justify-content-center align-items-center">
-            <Container className="col-4 text-center">
-              <Spinner animation="border" variant="dark" /> 
-            </Container>
-          </Container>
-        </Container>
-      )
-    } else {
-      return <Redirect to="/login" /> 
-    }
+    // Display a loading spinner while they wait. 
+    // If they can't be authenticated, redirect to the login page.
+    return this.state.loading ? <Loading /> : <Redirect to="/login" /> 
   }
-
 }
+
 
 const mapStateToProps = state => {
   return {
